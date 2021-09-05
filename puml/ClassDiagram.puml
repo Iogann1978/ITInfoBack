@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+class Book {
+    - Long id
+    - String title
+    - int pages
+    - Set<Author> authors
+    - Publisher publisher
+    - BookRate rate
+    - int year
+    - BookState state
+    - Set<Tag> tags
+    - Descript descript
+    - byte[] contents
+    - BookFile file
+}
+class Author {
+    - Long id
+    - String name
+    - String normalizedName
+    - Set<Book> books
+}
+class BookFile {
+    - Long id
+    - String filename
+    - Long size
+    - Book book
+}
+class Descript {
+    - Long id
+    - byte[] text
+    - Book book
+}
+class Publisher {
+    - Long id
+    - String name
+    - Set<Book> books
+}
+class Tag {
+    - Long id
+    - String tag
+    - Set<Book> books
+}
+enum BookRate {
+    WORST
+    BAD
+    INDIFFERENT
+    GOOD
+    BEST
+    UNKNOWN
+}
+enum BookState {
+    STUDIED
+    LEFT
+    PLANNED
+    READING
+}
+
+Author *- Book
+BookFile - Book
+Descript - Book
+Publisher -* Book
+Tag *-* Book
+BookRate *- Book
+BookState *- Book
+@enduml
