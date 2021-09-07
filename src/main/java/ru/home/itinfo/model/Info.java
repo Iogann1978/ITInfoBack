@@ -1,23 +1,36 @@
 package ru.home.itinfo.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
-@Builder
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Info {
-    private Long id;
-    private String title;
-    private Publisher publisher;
-    private Rate rate;
-    private State state;
-    private Set<Tag> tags;
-    private int year;
-    private Descript descript;
-    private byte[] contents;
-    private InfoFile file;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
+    protected String title;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PUBLISHER_ID")
+    protected Publisher publisher;
+    protected Rate rate;
+    protected State state;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BOOK_TAG", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID")})
+    protected Set<Tag> tags;
+    protected int year;
+    @OneToOne(cascade = CascadeType.ALL)
+    protected Descript descript;
+    @EqualsAndHashCode.Exclude
+    protected byte[] contents;
+    @OneToOne(cascade = CascadeType.ALL)
+    protected InfoFile file;
 }

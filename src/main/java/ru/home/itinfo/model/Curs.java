@@ -1,14 +1,16 @@
 package ru.home.itinfo.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Entity;
 import java.time.Duration;
 
 @Data
 @NoArgsConstructor
-@Builder
+@SuperBuilder
+@Entity
 public class Curs extends Info {
     private Duration duration;
 }

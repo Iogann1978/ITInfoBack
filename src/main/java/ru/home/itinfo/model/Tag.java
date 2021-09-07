@@ -1,16 +1,21 @@
 package ru.home.itinfo.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @Builder
+@Entity
 public class Tag {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String tag;
-    private Set<Book> books;
+    @ManyToMany(mappedBy = "tags")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Info> infos;
 }
