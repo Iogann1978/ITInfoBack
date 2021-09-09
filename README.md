@@ -8,3 +8,4 @@
 * [Google API OAuth2](https://developers.google.com/books/docs/v1/using)
 * [openlibrary.org](https://openlibrary.org/isbn/9781484250792.json)
 * [isbnsearch.org](https://isbnsearch.org/isbn/9781484250792)
+* [Spring Boot, Vue.js, Axios and Thymeleaf with Bootstrap in 4 commits](https://dev.to/brunodrugowick/spring-boot-vue-js-axios-and-thymeleaf-with-bootstrap-in-4-commits-2b0l)
