@@ -2,6 +2,7 @@
 class Info {
     - Long id
     - String title
+    - String isbn
     - Publisher publisher
     - Rate rate
     - State state
