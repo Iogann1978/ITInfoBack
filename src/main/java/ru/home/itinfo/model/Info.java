@@ -29,8 +29,6 @@ public class Info {
     protected int year;
     @OneToOne(cascade = CascadeType.ALL)
     protected Descript descript;
-    @EqualsAndHashCode.Exclude
-    protected byte[] contents;
     @OneToOne(cascade = CascadeType.ALL)
     protected InfoFile file;
 }

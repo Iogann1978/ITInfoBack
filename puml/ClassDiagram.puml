@@ -9,7 +9,7 @@ class Info {
     - Set<Tag> tags
     - int year
     - Descript descript
-    - byte[] contents
+    - Content content
     - InfoFile file
 }
 class Book {
@@ -28,6 +28,10 @@ class InfoFile {
     - Long size
 }
 class Descript {
+    - Long id
+    - byte[] text
+}
+class Content {
     - Long id
     - byte[] text
 }
@@ -65,6 +69,7 @@ Curs <|-- Info
 Author *-- Book
 InfoFile *-- Book
 Descript *-- Book
+Content *-- Book
 Publisher *-- Book
 Tag *-- Book
 Rate *-- Book
