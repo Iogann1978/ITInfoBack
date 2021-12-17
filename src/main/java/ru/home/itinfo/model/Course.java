@@ -11,6 +11,6 @@ import java.time.Duration;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
-public class Curs extends Info {
+public class Course extends Info {
     private Duration duration;
 }

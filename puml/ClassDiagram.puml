@@ -59,12 +59,12 @@ enum State {
     PLANNED
     READING
 }
-class Curs {
+class Course {
     - Duration duration
 }
 
 Book <|-- Info
-Curs <|-- Info
+Course <|-- Info
 
 Author *-- Book
 InfoFile *-- Book
