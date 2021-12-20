@@ -30,5 +30,7 @@ public class Info {
     @OneToOne(cascade = CascadeType.ALL)
     protected Descript descript;
     @OneToOne(cascade = CascadeType.ALL)
+    protected Content content;
+    @OneToOne(cascade = CascadeType.ALL)
     protected InfoFile file;
 }
