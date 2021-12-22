@@ -1,5 +1,6 @@
 package ru.home.itinfo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -9,7 +10,9 @@ import lombok.*;
 @Schema(description = "Издатель")
 public class PublisherDTO {
     @Schema(description = "id")
+    @JsonProperty("id")
     private Long id;
     @Schema(description = "Наименование")
+    @JsonProperty("name")
     private String name;
 }

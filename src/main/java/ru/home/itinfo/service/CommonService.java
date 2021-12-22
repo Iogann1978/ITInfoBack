@@ -20,6 +20,11 @@ public abstract class CommonService<T1, T2, ID> {
         return list2.stream().map(commonMapper::entityToDto).collect(Collectors.toList());
     }
 
+    public T1 get(ID id) {
+        T2 t2 = repository.getById(id);
+        return commonMapper.entityToDto(t2);
+    }
+
     public void save(T1 t1) {
         T2 t2 = commonMapper.dtoToEntity(t1);
         repository.save(t2);

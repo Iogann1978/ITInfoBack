@@ -1,9 +1,9 @@
 package ru.home.itinfo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Описание")
 public class DescriptDTO {
     @Schema(description = "id")
+    @JsonProperty("id")
     private Long id;
-    @EqualsAndHashCode.Exclude
     @Schema(description = "Байты")
+    @JsonProperty("text")
     private byte[] text;
 }

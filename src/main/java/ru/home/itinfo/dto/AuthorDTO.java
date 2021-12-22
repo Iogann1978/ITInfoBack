@@ -1,12 +1,10 @@
 package ru.home.itinfo.dto;
 
-import io.swagger.v3.oas.annotations.Operation;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +12,9 @@ import java.util.Set;
 @Schema(description = "Автор")
 public class AuthorDTO {
     @Schema(description = "id")
+    @JsonProperty("id")
     private Long id;
     @Schema(description = "Имя автора")
+    @JsonProperty("name")
     private String name;
 }

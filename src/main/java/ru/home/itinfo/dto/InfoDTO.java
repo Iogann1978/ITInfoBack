@@ -1,10 +1,9 @@
 package ru.home.itinfo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
@@ -14,25 +13,33 @@ import java.util.Set;
 @NoArgsConstructor
 public class InfoDTO {
     @Schema(description = "id")
+    @JsonProperty("id")
     protected Long id;
     @Schema(description = "Название")
+    @JsonProperty("title")
     protected String title;
     @Schema(description = "Издатель")
+    @JsonProperty("publisher")
     protected PublisherDTO publisher;
     @Schema(description = "Оценка")
+    @JsonProperty("rate")
     protected RateDTO rate;
     @Schema(description = "Состояние")
+    @JsonProperty("state")
     protected StateDTO state;
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     @Schema(description = "Тэги")
+    @JsonProperty("tags")
     protected Set<TagDTO> tags;
-    @Schema(description = "Год издания")
+    @Schema(description = "Год издания", minimum = "0")
+    @JsonProperty("year")
     protected int year;
     @Schema(description = "Описание")
+    @JsonProperty("descript")
     protected DescriptDTO descript;
     @Schema(description = "Содержание")
-    protected ContentDTO contentDTO;
+    @JsonProperty("content")
+    protected ContentDTO content;
     @Schema(description = "Файл или папка")
+    @JsonProperty("file")
     protected InfoFileDTO file;
 }
