@@ -3,6 +3,8 @@ package ru.home.itinfo.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.TagDTO;
 import ru.home.itinfo.service.TagService;
@@ -10,10 +12,14 @@ import ru.home.itinfo.service.TagService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/tag")
 public class TagController {
-    private TagService tagService;
+    private final TagService tagService;
+
+    @Autowired
+    public TagController(TagService tagService) {
+        this.tagService = tagService;
+    }
 
     @GetMapping
     @Operation(summary = "Получить список тэгов")
@@ -32,6 +38,7 @@ public class TagController {
 
     @PostMapping
     @Operation(summary = "Сохранить тэг")
+    @ResponseStatus(HttpStatus.CREATED)
     public void save(
             @Parameter(description = "Тэг")
             @RequestBody TagDTO tagDTO

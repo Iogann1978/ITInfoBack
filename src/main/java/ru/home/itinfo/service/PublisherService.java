@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.PublisherRepository;
 public class PublisherService extends CommonService<PublisherDTO, Publisher, Long> {
     @Autowired
     public PublisherService(PublisherRepository publisherRepository, PublisherMapper publisherMapper) {
-        super(publisherRepository, publisherMapper);
+        super(publisherRepository, publisherMapper, "Издатель");
     }
 }

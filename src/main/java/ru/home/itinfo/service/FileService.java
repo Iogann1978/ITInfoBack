@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.FileRepository;
 public class FileService extends CommonService<InfoFileDTO, InfoFile, Long> {
     @Autowired
     public FileService(FileRepository fileRepository, InfoFileMapper infoFileMapper) {
-        super(fileRepository, infoFileMapper);
+        super(fileRepository, infoFileMapper, "Файл");
     }
 }

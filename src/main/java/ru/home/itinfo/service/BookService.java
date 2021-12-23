@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.BookRepository;
 public class BookService extends CommonService<BookDTO, Book, Long> {
     @Autowired
     public BookService(BookRepository bookRepository, BookMapper bookMapper) {
-        super(bookRepository, bookMapper);
+        super(bookRepository, bookMapper, "Книга");
     }
 }

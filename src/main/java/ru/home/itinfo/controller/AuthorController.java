@@ -3,6 +3,8 @@ package ru.home.itinfo.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.AuthorDTO;
 import ru.home.itinfo.service.AuthorService;
@@ -10,10 +12,14 @@ import ru.home.itinfo.service.AuthorService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/author")
 public class AuthorController {
-    private AuthorService authorService;
+    private final AuthorService authorService;
+
+    @Autowired
+    private AuthorController(AuthorService authorService) {
+        this.authorService = authorService;
+    }
 
     @GetMapping
     @Operation(summary = "Получить список авторов")
@@ -21,7 +27,7 @@ public class AuthorController {
         return authorService.getAll();
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     @Operation(summary = "Получить автора")
     public AuthorDTO get(
             @Parameter(description = "id")
@@ -32,6 +38,7 @@ public class AuthorController {
 
     @PostMapping
     @Operation(summary = "Сохранить автора")
+    @ResponseStatus(HttpStatus.CREATED)
     public void save(
             @Parameter(description = "Автор")
             @RequestBody AuthorDTO authorDTO

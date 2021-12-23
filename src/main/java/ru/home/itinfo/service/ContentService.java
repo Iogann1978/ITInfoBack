@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.ContentRepository;
 public class ContentService extends CommonService<ContentDTO, Content, Long> {
     @Autowired
     public ContentService(ContentRepository contentRepository, ContentMapper contentMapper) {
-        super(contentRepository, contentMapper);
+        super(contentRepository, contentMapper, "Содержание");
     }
 }

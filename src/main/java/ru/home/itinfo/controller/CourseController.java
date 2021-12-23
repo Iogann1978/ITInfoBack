@@ -3,6 +3,8 @@ package ru.home.itinfo.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.CourseDTO;
 import ru.home.itinfo.service.CourseService;
@@ -10,10 +12,14 @@ import ru.home.itinfo.service.CourseService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/course")
 public class CourseController {
-    private CourseService courseService;
+    private final CourseService courseService;
+
+    @Autowired
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @GetMapping
     @Operation(summary = "Получить список курсов")
@@ -32,6 +38,7 @@ public class CourseController {
 
     @PostMapping
     @Operation(summary = "Сохранить курс")
+    @ResponseStatus(HttpStatus.CREATED)
     public void save(
             @Parameter(description = "Курс")
             @RequestBody CourseDTO courseDTO

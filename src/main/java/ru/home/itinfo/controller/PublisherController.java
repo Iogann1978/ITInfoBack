@@ -3,6 +3,8 @@ package ru.home.itinfo.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.PublisherDTO;
 import ru.home.itinfo.service.PublisherService;
@@ -10,10 +12,14 @@ import ru.home.itinfo.service.PublisherService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/publisher")
 public class PublisherController {
-    private PublisherService publisherService;
+    private final PublisherService publisherService;
+
+    @Autowired
+    public PublisherController(PublisherService publisherService) {
+        this.publisherService = publisherService;
+    }
 
     @GetMapping
     @Operation(summary = "Получить список издателей")
@@ -32,6 +38,7 @@ public class PublisherController {
 
     @PostMapping
     @Operation(summary = "Сохранить издателя")
+    @ResponseStatus(HttpStatus.CREATED)
     public void save(
             @Parameter(description = "Издатель")
             @RequestBody PublisherDTO publisherDTO

@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.DescriptRepository;
 public class DescriptService extends CommonService<DescriptDTO, Descript, Long> {
     @Autowired
     public DescriptService(DescriptRepository descriptRepository, DescriptMapper descriptMapper) {
-        super(descriptRepository, descriptMapper);
+        super(descriptRepository, descriptMapper, "Описание");
     }
 }

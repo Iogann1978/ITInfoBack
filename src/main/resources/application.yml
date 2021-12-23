@@ -1,1 +1,4 @@
-
+google:
+  api:
+    host: www.googleapis.com
+    path: books/v1/volumes

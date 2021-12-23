@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.AuthorRepository;
 public class AuthorService extends CommonService<AuthorDTO, Author, Long> {
     @Autowired
     public AuthorService(AuthorRepository authorRepository, AuthorMapper authorMapper) {
-        super(authorRepository, authorMapper);
+        super(authorRepository, authorMapper, "Автор");
     }
 }

@@ -3,6 +3,7 @@ package ru.home.itinfo.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.service.BookService;
@@ -10,10 +11,13 @@ import ru.home.itinfo.service.BookService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/book")
 public class BookController {
-    private BookService bookService;
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping
     @Operation(summary = "Получить список книг")
@@ -32,6 +36,7 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "Сохранить книгу")
+    @ResponseStatus(HttpStatus.CREATED)
     public void save(
             @Parameter(description = "Книга")
             @RequestBody BookDTO bookDTO

@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.TagRepository;
 public class TagService extends CommonService<TagDTO, Tag, Long> {
     @Autowired
     public TagService(TagRepository tagRepository, TagMapper tagMapper) {
-        super(tagRepository, tagMapper);
+        super(tagRepository, tagMapper, "Тэг");
     }
 }

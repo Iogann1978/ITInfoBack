@@ -11,6 +11,6 @@ import ru.home.itinfo.repository.CourseRepository;
 public class CourseService extends CommonService<CourseDTO, Course, Long> {
     @Autowired
     public CourseService(CourseRepository courseRepository, CourseMapper courseMapper) {
-        super(courseRepository, courseMapper);
+        super(courseRepository, courseMapper, "Курс");
     }
 }
