@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 @Entity
 public class Book extends Info {

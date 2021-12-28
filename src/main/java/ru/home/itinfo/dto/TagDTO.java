@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.util.Set;
-
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Schema(description = "Тэг")

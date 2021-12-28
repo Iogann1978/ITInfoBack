@@ -2,22 +2,19 @@ package ru.home.itinfo.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.ContentDTO;
 import ru.home.itinfo.service.ContentService;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/content")
+@Tag(name = "Контроллер работы с содержанием")
 public class ContentController {
     private final ContentService contentService;
-
-    @Autowired
-    public ContentController(ContentService contentService) {
-        this.contentService = contentService;
-    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Получить содержание")

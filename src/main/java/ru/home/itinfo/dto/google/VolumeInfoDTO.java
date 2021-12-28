@@ -20,4 +20,8 @@ public class VolumeInfoDTO {
     private LocalDate publishedDate;
     @JsonProperty
     private String description;
+    @JsonProperty
+    private Integer pageCount;
+    @JsonProperty
+    private String isbn;
 }

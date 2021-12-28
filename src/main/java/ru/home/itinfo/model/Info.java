@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Info {

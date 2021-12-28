@@ -2,8 +2,8 @@ package ru.home.itinfo.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.TagDTO;
@@ -12,14 +12,11 @@ import ru.home.itinfo.service.TagService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/tag")
+@Tag(name = "Контроллер работы с тэгами")
 public class TagController {
     private final TagService tagService;
-
-    @Autowired
-    public TagController(TagService tagService) {
-        this.tagService = tagService;
-    }
 
     @GetMapping
     @Operation(summary = "Получить список тэгов")

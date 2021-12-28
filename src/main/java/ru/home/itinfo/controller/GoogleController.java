@@ -1,25 +1,29 @@
 package ru.home.itinfo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.home.itinfo.dto.google.VolumeDTO;
+import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.service.GoogleService;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/google")
+@Tag(name = "Контроллер работы с сервисом Google")
 public class GoogleController {
     private final GoogleService googleService;
 
-    @Autowired
-    public GoogleController(GoogleService googleService) {
-        this.googleService = googleService;
-    }
-
     @GetMapping("/{isbn}")
-    public VolumeDTO get(@PathVariable String isbn) {
+    @Operation(summary = "Поиск описания книги по isbn")
+    public BookDTO get(
+            @Parameter(description = "isbn")
+            @PathVariable String isbn
+    ) {
         return googleService.get(isbn);
     }
 }

@@ -2,8 +2,8 @@ package ru.home.itinfo.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.AuthorDTO;
@@ -12,14 +12,11 @@ import ru.home.itinfo.service.AuthorService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/author")
+@Tag(name = "Контроллер работы с авторами")
 public class AuthorController {
     private final AuthorService authorService;
-
-    @Autowired
-    private AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
 
     @GetMapping
     @Operation(summary = "Получить список авторов")

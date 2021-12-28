@@ -8,8 +8,9 @@ import lombok.experimental.SuperBuilder;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Schema(description = "Книга")
 public class BookDTO extends InfoDTO {
     @Schema(description = "Количество страниц", minimum = "1")
