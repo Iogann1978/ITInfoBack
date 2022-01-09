@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import ru.home.itinfo.service.GoogleService;
 @RequiredArgsConstructor
 @RequestMapping("/google")
 @Tag(name = "Контроллер работы с сервисом Google")
+@Slf4j
 public class GoogleController {
     private final GoogleService googleService;
 
@@ -24,6 +26,7 @@ public class GoogleController {
             @Parameter(description = "isbn")
             @PathVariable String isbn
     ) {
+        log.debug("GoogleController get: {}", isbn);
         return googleService.get(isbn);
     }
 }

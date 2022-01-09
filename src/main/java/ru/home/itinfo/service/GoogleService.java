@@ -38,10 +38,7 @@ public class GoogleService {
         if (volumeDTO == null || CollectionUtils.isEmpty(volumeDTO.getItems())) {
             throw new NotFoundException(String.format("Книга по isbn %s не найдена", isbn));
         }
-        /*
         volumeDTO.getItems().get(0).getVolumeInfo().setIsbn(isbn);
         return volumeMapper.volumeToBook(volumeDTO.getItems().get(0).getVolumeInfo());
-         */
-        return null;
     }
 }
