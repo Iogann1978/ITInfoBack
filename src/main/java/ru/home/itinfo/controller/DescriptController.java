@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.home.itinfo.dto.DescriptDTO;
 import ru.home.itinfo.service.DescriptService;
 
 @RestController
@@ -16,31 +14,21 @@ import ru.home.itinfo.service.DescriptService;
 public class DescriptController {
     private DescriptService descriptService;
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Получить описание")
-    public DescriptDTO get(
-            @Parameter(description = "id")
-            @PathVariable Long id
+    @GetMapping("/book/{id}")
+    @Operation(summary = "Получить описание книги")
+    public String getFromBook(
+            @Parameter(description = "id книги")
+            @PathVariable Long bookId
     ) {
-        return descriptService.get(id);
+        return descriptService.getFromBook(bookId);
     }
 
-    @PostMapping
-    @Operation(summary = "Сохранить описание")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void save(
-            @Parameter(description = "Описание")
-            @RequestBody DescriptDTO descriptDTO
+    @GetMapping("/course/{id}")
+    @Operation(summary = "Получить описание курса")
+    public String getFromCourse(
+            @Parameter(description = "id курса")
+            @PathVariable Long courseId
     ) {
-        descriptService.save(descriptDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Удалить описание")
-    public void delete(
-            @Parameter(description = "id")
-            @PathVariable Long id
-    ) {
-        descriptService.delete(id);
+        return descriptService.getFromCourse(courseId);
     }
 }

@@ -1,16 +1,28 @@
 package ru.home.itinfo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.home.itinfo.dto.DescriptDTO;
-import ru.home.itinfo.mapper.DescriptMapper;
-import ru.home.itinfo.model.Descript;
-import ru.home.itinfo.repository.DescriptRepository;
+import ru.home.itinfo.exception.NotFoundException;
+import ru.home.itinfo.repository.BookRepository;
+import ru.home.itinfo.repository.CourseRepository;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
-public class DescriptService extends CommonService<DescriptDTO, Descript, Long> {
-    @Autowired
-    public DescriptService(DescriptRepository descriptRepository, DescriptMapper descriptMapper) {
-        super(descriptRepository, descriptMapper, "Описание");
+@RequiredArgsConstructor
+public class DescriptService {
+    private final BookRepository bookRepository;
+    private final CourseRepository courseRepository;
+
+    public String getFromBook(Long bookId) {
+        return bookRepository.findById(bookId)
+                .map(book -> new String(book.getDescript().getText(), StandardCharsets.UTF_8))
+                .orElseThrow(() -> new NotFoundException(String.format("Книга с id=%d не найдена", bookId)));
+    }
+
+    public String getFromCourse(Long courseId) {
+        return courseRepository.findById(courseId)
+                .map(course -> new String(course.getDescript().getText(), StandardCharsets.UTF_8))
+                .orElseThrow(() -> new NotFoundException(String.format("Курс с id=%d не найдена", courseId)));
     }
 }
