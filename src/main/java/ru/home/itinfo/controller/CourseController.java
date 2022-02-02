@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course")
-@Tag(name = "Контроллер работы с курсами")
+@Tag(name = "CourseController", description = "Контроллер работы с курсами")
 public class CourseController {
     private final CourseService courseService;
 

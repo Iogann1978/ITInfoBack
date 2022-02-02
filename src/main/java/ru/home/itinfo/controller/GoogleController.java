@@ -15,7 +15,7 @@ import ru.home.itinfo.service.GoogleService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/google")
-@Tag(name = "Контроллер работы с сервисом Google")
+@Tag(name = "GoogleController", description = "Контроллер работы с сервисом Google")
 @Slf4j
 public class GoogleController {
     private final GoogleService googleService;

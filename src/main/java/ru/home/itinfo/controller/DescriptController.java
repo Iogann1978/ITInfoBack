@@ -10,7 +10,7 @@ import ru.home.itinfo.service.DescriptService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/descript")
-@Tag(name = "Контроллер работы с описанием")
+@Tag(name = "DescriptController", description = "Контроллер работы с описанием")
 public class DescriptController {
     private DescriptService descriptService;
 

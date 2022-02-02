@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/publisher")
-@Tag(name = "Контроллер работы с издателями")
+@Tag(name = "PublisherController", description = "Контроллер работы с издателями")
 public class PublisherController {
     private final PublisherService publisherService;
 

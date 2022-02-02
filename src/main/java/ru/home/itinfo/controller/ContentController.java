@@ -12,7 +12,7 @@ import ru.home.itinfo.service.ContentService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/content")
-@Tag(name = "Контроллер работы с содержанием")
+@Tag(name = "ContentController", description = "Контроллер работы с содержанием")
 public class ContentController {
     private final ContentService contentService;
 
