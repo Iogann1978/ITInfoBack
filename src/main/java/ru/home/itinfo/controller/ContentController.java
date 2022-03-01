@@ -4,15 +4,19 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.home.itinfo.dto.ContentDTO;
 import ru.home.itinfo.service.ContentService;
+
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/content")
 @Tag(name = "ContentController", description = "Контроллер работы с содержанием")
+@Slf4j
 public class ContentController {
     private final ContentService contentService;
 
@@ -25,22 +29,18 @@ public class ContentController {
         return contentService.get(id);
     }
 
-    @PostMapping
-    @Operation(summary = "Сохранить содержание")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void save(
-            @Parameter(description = "Содержание")
-            @RequestBody ContentDTO contentDTO
+    @PostMapping("/{id}")
+    @Operation(summary = "Обновить содержание")
+    public void contentUpload(
+            @Parameter(description = "id содержания")
+            @PathVariable Long id,
+            @Parameter(description = "Содержимое файла")
+            @RequestParam("file") MultipartFile file
     ) {
-        contentService.save(contentDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Удалить содержание")
-    public void delete(
-            @Parameter(description = "id")
-            @PathVariable Long id
-    ) {
-        contentService.delete(id);
+        try {
+            log.info("file: {} {}", id, new String(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
