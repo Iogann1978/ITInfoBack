@@ -6,3 +6,10 @@ google:
   api:
     host: www.googleapis.com
     path: books/v1/volumes
+
+logging:
+  level:
+    root: info
+    ru:
+      home:
+        itinfo: debug
