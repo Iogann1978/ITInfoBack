@@ -6,4 +6,5 @@ import ru.home.itinfo.model.Tag;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long> {
+    boolean existsByTag(String tag);
 }

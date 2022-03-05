@@ -9,8 +9,18 @@ import ru.home.itinfo.repository.TagRepository;
 
 @Service
 public class TagService extends CommonService<TagDTO, Tag, Long> {
+    private final TagRepository tagRepository;
+
     @Autowired
     public TagService(TagRepository tagRepository, TagMapper tagMapper) {
         super(tagRepository, tagMapper, "Тэг");
+        this.tagRepository = tagRepository;
+    }
+
+    @Override
+    public void save(TagDTO tagDTO) {
+        if (!tagRepository.existsByTag(tagDTO.getTag())) {
+            super.save(tagDTO);
+        }
     }
 }

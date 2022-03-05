@@ -2,6 +2,16 @@ server:
   servlet:
     context-path: /api
 
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:file:db\itinfodb
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 google:
   api:
     host: www.googleapis.com
