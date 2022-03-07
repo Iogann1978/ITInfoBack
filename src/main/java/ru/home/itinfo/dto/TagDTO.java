@@ -10,9 +10,6 @@ import lombok.*;
 @Builder
 @Schema(description = "Тэг")
 public class TagDTO {
-    @Schema(description = "id")
-    @JsonProperty("id")
-    private Long id;
     @Schema(description = "Наименование")
     @JsonProperty("tag")
     private String tag;

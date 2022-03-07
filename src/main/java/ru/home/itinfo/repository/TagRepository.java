@@ -5,6 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Tag;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
-    boolean existsByTag(String tag);
+public interface TagRepository extends JpaRepository<Tag, String> {
 }

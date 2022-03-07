@@ -24,15 +24,6 @@ public class TagController {
         return tagService.getAll();
     }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Получить тэг")
-    public TagDTO get(
-            @Parameter(description = "id")
-            @PathVariable Long id
-    ) {
-        return tagService.get(id);
-    }
-
     @PostMapping
     @Operation(summary = "Сохранить тэг")
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,12 +34,12 @@ public class TagController {
         tagService.save(tagDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{tag}")
     @Operation(summary = "Удалить тэг")
     public void delete(
-            @Parameter(description = "id")
-            @PathVariable Long id
+            @Parameter(description = "Тэг")
+            @PathVariable String tag
     ) {
-        tagService.delete(id);
+        tagService.delete(tag);
     }
 }
