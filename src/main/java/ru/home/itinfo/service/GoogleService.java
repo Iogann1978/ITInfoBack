@@ -7,6 +7,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.home.itinfo.dto.BookDTO;
+import ru.home.itinfo.dto.RateDTO;
+import ru.home.itinfo.dto.StateDTO;
 import ru.home.itinfo.dto.google.VolumeDTO;
 import ru.home.itinfo.exception.NotFoundException;
 import ru.home.itinfo.mapper.VolumeMapper;
@@ -39,6 +41,9 @@ public class GoogleService {
             throw new NotFoundException(String.format("Книга по isbn %s не найдена", isbn));
         }
         volumeDTO.getItems().get(0).getVolumeInfo().setIsbn(isbn);
-        return volumeMapper.volumeToBook(volumeDTO.getItems().get(0).getVolumeInfo());
+        BookDTO bookDTO = volumeMapper.volumeToBook(volumeDTO.getItems().get(0).getVolumeInfo());
+        bookDTO.setRate(RateDTO.GOOD);
+        bookDTO.setState(StateDTO.PLANNED);
+        return bookDTO;
     }
 }
