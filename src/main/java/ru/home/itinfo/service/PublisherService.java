@@ -9,8 +9,16 @@ import ru.home.itinfo.repository.PublisherRepository;
 
 @Service
 public class PublisherService extends CommonService<PublisherDTO, Publisher, Long> {
+    private final PublisherRepository publisherRepository;
+
     @Autowired
     public PublisherService(PublisherRepository publisherRepository, PublisherMapper publisherMapper) {
         super(publisherRepository, publisherMapper, "Издатель");
+        this.publisherRepository = publisherRepository;
+    }
+
+    public Publisher getPublisher(String name) {
+        return publisherRepository.findFirstByName(name)
+                .orElse(saveEntity(Publisher.builder().name(name).build()));
     }
 }

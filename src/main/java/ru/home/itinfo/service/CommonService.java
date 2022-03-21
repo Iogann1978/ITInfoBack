@@ -37,6 +37,10 @@ public abstract class CommonService<T1, T2, ID> {
         repository.save(t2);
     }
 
+    public T2 saveEntity(T2 t2) {
+        return repository.save(t2);
+    }
+
     public void delete(ID id) {
         repository.deleteById(id);
     }

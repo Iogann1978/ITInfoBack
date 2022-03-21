@@ -9,8 +9,16 @@ import ru.home.itinfo.repository.AuthorRepository;
 
 @Service
 public class AuthorService extends CommonService<AuthorDTO, Author, Long> {
+    private final AuthorRepository authorRepository;
+
     @Autowired
     public AuthorService(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         super(authorRepository, authorMapper, "Автор");
+        this.authorRepository = authorRepository;
+    }
+
+    public Author getAuthor(String name) {
+        return authorRepository.findFirstByName(name)
+                .orElse(saveEntity(Author.builder().name(name).build()));
     }
 }
