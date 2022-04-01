@@ -1,14 +1,12 @@
 package ru.home.itinfo.mapper;
 
 import lombok.Cleanup;
+import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import ru.home.itinfo.dto.AuthorDTO;
-import ru.home.itinfo.dto.BookDTO;
-import ru.home.itinfo.dto.DescriptDTO;
-import ru.home.itinfo.dto.PublisherDTO;
+import ru.home.itinfo.dto.*;
 import ru.home.itinfo.dto.google.VolumeInfoDTO;
 
 import java.io.ByteArrayOutputStream;
@@ -23,11 +21,12 @@ import java.util.stream.Collectors;
 public interface VolumeMapper {
     @Mappings({
             @Mapping(target = "pages", source = "dto.pageCount"),
-            @Mapping(target = "title", expression = "java(dto.getTitle() + \" \" + dto.getSubtitle())"),
+            @Mapping(target = "title", expression = "java(java.util.stream.Stream.of(dto.getTitle(), dto.getSubtitle()).filter(org.apache.commons.lang3.StringUtils::isNotEmpty).collect(java.util.stream.Collectors.joining(\" \")))"),
             @Mapping(target = "publisher", source = "dto.publisher", qualifiedByName = "toPublisher"),
             @Mapping(target = "year", source = "dto.publishedDate", qualifiedByName = "toYear"),
             @Mapping(target = "descript", source = "dto.description", qualifiedByName = "toDescript"),
-            @Mapping(target = "authors", source = "dto.authors", qualifiedByName = "toAuthors")
+            @Mapping(target = "authors", source = "dto.authors", qualifiedByName = "toAuthors"),
+            @Mapping(target = "tags", source = "dto.categories", qualifiedByName = "toTags")
     })
     BookDTO volumeToBook(VolumeInfoDTO dto);
 
@@ -37,8 +36,9 @@ public interface VolumeMapper {
     }
 
     @Named("toYear")
-    static int toYear(LocalDate publishedDate) {
-        return publishedDate.getYear();
+    static int toYear(String publishedDate) {
+        return StringUtils.isNumeric(publishedDate) ? Integer.valueOf(publishedDate) :
+                LocalDate.parse(publishedDate).getYear();
     }
 
     @Named("toDescript")
@@ -60,5 +60,10 @@ public interface VolumeMapper {
     @Named("toAuthors")
     static Set<AuthorDTO> toAuthors(List<String> authors) {
         return authors.stream().map(a -> AuthorDTO.builder().name(a).build()).collect(Collectors.toSet());
+    }
+
+    @Named("toTags")
+    static Set<TagDTO> toTags(List<String> categories) {
+        return categories.stream().map(c -> TagDTO.builder().tag(c).build()).collect(Collectors.toSet());
     }
 }

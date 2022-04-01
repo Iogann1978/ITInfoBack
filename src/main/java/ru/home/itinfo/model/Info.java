@@ -24,7 +24,7 @@ public class Info {
     protected State state;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "BOOK_TAG", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID")})
     protected Set<Tag> tags;
     protected int year;
