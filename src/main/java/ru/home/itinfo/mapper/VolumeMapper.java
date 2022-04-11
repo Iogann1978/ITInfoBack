@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.springframework.util.CollectionUtils;
 import ru.home.itinfo.dto.*;
 import ru.home.itinfo.dto.google.VolumeInfoDTO;
 
@@ -13,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -64,6 +66,8 @@ public interface VolumeMapper {
 
     @Named("toTags")
     static Set<TagDTO> toTags(List<String> categories) {
-        return categories.stream().map(c -> TagDTO.builder().tag(c).build()).collect(Collectors.toSet());
+        return !CollectionUtils.isEmpty(categories) ?
+                categories.stream().map(c -> TagDTO.builder().tag(c).build()).collect(Collectors.toSet()) :
+                Collections.EMPTY_SET;
     }
 }

@@ -17,7 +17,7 @@ public class Info {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
     protected String title;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "PUBLISHER_ID")
     protected Publisher publisher;
     protected Rate rate;
