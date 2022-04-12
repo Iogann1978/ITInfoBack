@@ -13,7 +13,6 @@ import ru.home.itinfo.dto.google.VolumeInfoDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,7 @@ public interface VolumeMapper {
     @Named("toYear")
     static int toYear(String publishedDate) {
         return StringUtils.isNumeric(publishedDate) ? Integer.valueOf(publishedDate) :
-                LocalDate.parse(publishedDate).getYear();
+                Integer.valueOf(publishedDate.substring(0, 4));
     }
 
     @Named("toDescript")

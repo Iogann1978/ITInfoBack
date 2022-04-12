@@ -14,9 +14,8 @@ class ItInfoApplicationTests {
 	private AuthorService authorService;
 
 	@Test
-	void contextLoads() {
-		Author peter = authorService.getAuthor("Peter Sp\u00e4th");
-		log.info("author: {}", peter);
+	void getAuthorTest() {
+		Author author = authorService.getAuthor("Mariot Tsitoara");
+		log.info("author: {}", author);
 	}
-
 }

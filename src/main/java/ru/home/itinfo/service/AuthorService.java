@@ -19,6 +19,6 @@ public class AuthorService extends CommonService<AuthorDTO, Author, Long> {
 
     public Author getAuthor(String name) {
         return authorRepository.findFirstByName(name)
-                .orElse(saveEntity(Author.builder().name(name).build()));
+                .orElseGet(() -> saveEntity(Author.builder().name(name).build()));
     }
 }

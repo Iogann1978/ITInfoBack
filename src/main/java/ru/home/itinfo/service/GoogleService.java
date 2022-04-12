@@ -45,7 +45,7 @@ public class GoogleService {
         }
         volumeDTO.getItems().get(0).getVolumeInfo().setIsbn(isbn);
         BookDTO bookDTO = volumeMapper.volumeToBook(volumeDTO.getItems().get(0).getVolumeInfo());
-        bookDTO.setRate(RateDTO.GOOD);
+        bookDTO.setRate(RateDTO.UNKNOWN);
         bookDTO.setState(StateDTO.PLANNED);
         Optional.ofNullable(bookDTO.getPublisher())
                 .map(PublisherDTO::getName).ifPresent(name -> {

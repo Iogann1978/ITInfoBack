@@ -19,6 +19,6 @@ public class PublisherService extends CommonService<PublisherDTO, Publisher, Lon
 
     public Publisher getPublisher(String name) {
         return publisherRepository.findFirstByName(name)
-                .orElse(saveEntity(Publisher.builder().name(name).build()));
+                .orElseGet(() -> saveEntity(Publisher.builder().name(name).build()));
     }
 }
