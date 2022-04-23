@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import java.time.Duration;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +13,5 @@ import java.time.Duration;
 @SuperBuilder
 @Entity
 public class Course extends Info {
-    private Duration duration;
+    private Integer duration;
 }

@@ -7,9 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.home.itinfo.dto.DescriptDTO;
+import ru.home.itinfo.mapper.DescriptMapper;
 import ru.home.itinfo.service.DescriptService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +25,7 @@ public class DescriptController {
 
     @GetMapping("/book/{id}")
     @Operation(summary = "Получить описание книги")
-    public String getFromBook(
+    public List<DescriptDTO> getFromBook(
             @Parameter(description = "id книги")
             @PathVariable Long bookId
     ) {
@@ -30,7 +34,7 @@ public class DescriptController {
 
     @GetMapping("/course/{id}")
     @Operation(summary = "Получить описание курса")
-    public String getFromCourse(
+    public List<DescriptDTO> getFromCourse(
             @Parameter(description = "id курса")
             @PathVariable Long courseId
     ) {

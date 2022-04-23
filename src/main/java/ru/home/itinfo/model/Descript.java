@@ -16,6 +16,7 @@ public class Descript {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     @EqualsAndHashCode.Exclude
     private byte[] text;
 }

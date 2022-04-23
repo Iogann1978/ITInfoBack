@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -28,10 +29,8 @@ public class Info {
     @JoinTable(name = "BOOK_TAG", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID")})
     protected Set<Tag> tags;
     protected int year;
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Descript descript;
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Content content;
+    @OneToMany(cascade = CascadeType.ALL)
+    protected List<Descript> descripts;
     @OneToOne(cascade = CascadeType.ALL)
     protected InfoFile file;
 }

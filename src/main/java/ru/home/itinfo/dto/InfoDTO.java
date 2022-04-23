@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -36,11 +37,8 @@ public class InfoDTO {
     @JsonProperty("year")
     protected int year;
     @Schema(description = "Описание")
-    @JsonProperty("descript")
-    protected DescriptDTO descript;
-    @Schema(description = "Содержание")
-    @JsonProperty("content")
-    protected ContentDTO content;
+    @JsonProperty("descripts")
+    protected List<DescriptDTO> descripts;
     @Schema(description = "Файл или папка")
     @JsonProperty("file")
     protected InfoFileDTO file;

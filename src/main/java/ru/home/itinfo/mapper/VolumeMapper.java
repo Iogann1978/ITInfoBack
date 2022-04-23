@@ -25,7 +25,7 @@ public interface VolumeMapper {
             @Mapping(target = "title", expression = "java(java.util.stream.Stream.of(dto.getTitle(), dto.getSubtitle()).filter(org.apache.commons.lang3.StringUtils::isNotEmpty).collect(java.util.stream.Collectors.joining(\" \")))"),
             @Mapping(target = "publisher", source = "dto.publisher", qualifiedByName = "toPublisher"),
             @Mapping(target = "year", source = "dto.publishedDate", qualifiedByName = "toYear"),
-            @Mapping(target = "descript", source = "dto.description", qualifiedByName = "toDescript"),
+            @Mapping(target = "descripts", source = "dto.description", qualifiedByName = "toDescripts"),
             @Mapping(target = "authors", source = "dto.authors", qualifiedByName = "toAuthors"),
             @Mapping(target = "tags", source = "dto.categories", qualifiedByName = "toTags")
     })
@@ -42,8 +42,8 @@ public interface VolumeMapper {
                 Integer.valueOf(publishedDate.substring(0, 4));
     }
 
-    @Named("toDescript")
-    static DescriptDTO toDescript(String description) throws IOException {
+    @Named("toDescripts")
+    static List<DescriptDTO> toDescripts(String description) throws IOException {
         @Cleanup
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         @Cleanup
@@ -55,7 +55,7 @@ public interface VolumeMapper {
         pw.println("\t\t</p>\n");
         pw.println("\t</body>\n");
         pw.println("</html>");
-        return DescriptDTO.builder().text(baos.toByteArray()).build();
+        return List.of(DescriptDTO.builder().text(baos.toByteArray()).build());
     }
 
     @Named("toAuthors")

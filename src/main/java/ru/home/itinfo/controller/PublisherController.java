@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.PublisherDTO;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/publisher")
 @Tag(name = "PublisherController", description = "Контроллер работы с издателями")
+@Slf4j
 public class PublisherController {
     private final PublisherService publisherService;
 
@@ -40,6 +42,7 @@ public class PublisherController {
             @Parameter(description = "Издатель")
             @RequestBody PublisherDTO publisherDTO
     ) {
+        log.debug("PublisherController save: {}", publisherDTO);
         publisherService.save(publisherDTO);
     }
 

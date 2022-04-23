@@ -16,6 +16,7 @@ import ru.home.itinfo.mapper.VolumeMapper;
 import ru.home.itinfo.model.Publisher;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ public class GoogleService {
     private final PublisherService publisherService;
     private final AuthorService authorService;
     private final TagService tagService;
+    private final DescriptService descriptService;
 
     public BookDTO get(String isbn) throws NotFoundException {
         URI uri = UriComponentsBuilder.newInstance().scheme("https")

@@ -16,6 +16,9 @@ public class DescriptDTO {
     @Schema(description = "id")
     @JsonProperty("id")
     private Long id;
+    @Schema(description = "Наименование")
+    @JsonProperty("name")
+    private String name;
     @Schema(description = "Байты")
     @JsonProperty("text")
     private byte[] text;

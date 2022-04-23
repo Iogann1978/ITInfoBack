@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.Duration;
-
 @Data
 @SuperBuilder
 @NoArgsConstructor
@@ -17,5 +15,5 @@ import java.time.Duration;
 public class CourseDTO extends InfoDTO {
     @Schema(description = "Продолжительность курса")
     @JsonProperty("duration")
-    private Duration duration;
+    private Integer duration;
 }
