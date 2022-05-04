@@ -29,8 +29,8 @@ public class Info {
     @JoinTable(name = "BOOK_TAG", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID")})
     protected Set<Tag> tags;
     protected int year;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     protected List<Descript> descripts;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     protected InfoFile file;
 }

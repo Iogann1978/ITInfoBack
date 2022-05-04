@@ -21,24 +21,15 @@ import java.util.stream.Collectors;
 @Tag(name = "DescriptController", description = "Контроллер работы с описанием")
 @Slf4j
 public class DescriptController {
-    private DescriptService descriptService;
+    private final DescriptService descriptService;
 
-    @GetMapping("/book/{id}")
-    @Operation(summary = "Получить описание книги")
-    public List<DescriptDTO> getFromBook(
-            @Parameter(description = "id книги")
-            @PathVariable Long bookId
+    @GetMapping("/{id}")
+    @Operation(summary = "Получить описание")
+    public DescriptDTO get(
+            @Parameter(description = "id")
+            @PathVariable Long id
     ) {
-        return descriptService.getFromBook(bookId);
-    }
-
-    @GetMapping("/course/{id}")
-    @Operation(summary = "Получить описание курса")
-    public List<DescriptDTO> getFromCourse(
-            @Parameter(description = "id курса")
-            @PathVariable Long courseId
-    ) {
-        return descriptService.getFromCourse(courseId);
+        return descriptService.get(id);
     }
 
     @PostMapping("/{id}")
