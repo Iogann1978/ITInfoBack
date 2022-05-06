@@ -18,19 +18,19 @@ public class Info {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
     protected String title;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "PUBLISHER_ID")
     protected Publisher publisher;
     protected Rate rate;
     protected State state;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "BOOK_TAG", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID")})
     protected Set<Tag> tags;
     protected int year;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     protected List<Descript> descripts;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     protected InfoFile file;
 }

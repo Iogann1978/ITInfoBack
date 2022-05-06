@@ -2,10 +2,7 @@ package ru.home.itinfo.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +14,8 @@ public class Descript {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Lob
+    @Column(length = 1000)
     @EqualsAndHashCode.Exclude
     private byte[] text;
 }

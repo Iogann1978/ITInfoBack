@@ -1,6 +1,7 @@
 package ru.home.itinfo.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,13 +17,13 @@ import ru.home.itinfo.mapper.VolumeMapper;
 import ru.home.itinfo.model.Publisher;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GoogleService {
     @Value("${google.api.host}")
     private String googleApiHost;

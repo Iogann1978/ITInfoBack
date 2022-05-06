@@ -48,14 +48,13 @@ public interface VolumeMapper {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         @Cleanup
         PrintWriter pw = new PrintWriter(baos);
-        pw.println("<html>\n");
-        pw.println("\t<body>\n");
-        pw.println("\t\t<p>\n");
+        pw.println("<div>");
+        pw.println("\t<p>");
         pw.println(description);
-        pw.println("\t\t</p>\n");
-        pw.println("\t</body>\n");
-        pw.println("</html>");
-        return List.of(DescriptDTO.builder().text(baos.toByteArray()).build());
+        pw.println("\t</p>");
+        pw.println("</div>");
+        pw.flush();
+        return List.of(DescriptDTO.builder().name("Google").text(baos.toByteArray()).build());
     }
 
     @Named("toAuthors")

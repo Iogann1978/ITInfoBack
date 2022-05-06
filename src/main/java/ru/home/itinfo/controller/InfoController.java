@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.home.itinfo.dto.InfoDTO;
 import ru.home.itinfo.service.InfoService;
 
 @RestController
@@ -17,12 +18,12 @@ import ru.home.itinfo.service.InfoService;
 public class InfoController {
     private final InfoService infoService;
 
-    @GetMapping("/title/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Получить название")
-    public String get(
+    public InfoDTO get(
             @Parameter(description = "id")
             @PathVariable Long id
     ) {
-        return infoService.get(id).getTitle();
+        return infoService.get(id);
     }
 }

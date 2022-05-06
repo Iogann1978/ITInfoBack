@@ -14,7 +14,7 @@ import java.util.Set;
 public class Book extends Info {
     private int pages;
     private String isbn;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "BOOK_AUTHOR", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID")})
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
