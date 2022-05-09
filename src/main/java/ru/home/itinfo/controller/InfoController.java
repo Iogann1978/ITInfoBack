@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.InfoDTO;
 import ru.home.itinfo.service.InfoService;
@@ -23,15 +22,5 @@ public class InfoController {
             @PathVariable Long id
     ) {
         return infoService.get(id);
-    }
-
-    @PostMapping
-    @Operation(summary = "Сохранить информацию")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void save(
-            @Parameter(description = "Информация")
-            @RequestBody InfoDTO infoDTO
-    ) {
-        infoService.save(infoDTO);
     }
 }
