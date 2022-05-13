@@ -46,4 +46,13 @@ public class DescriptController {
             e.printStackTrace();
         }
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Удалить описание")
+    public void delete(
+            @Parameter(description = "id")
+            @PathVariable Long id
+    ) {
+        descriptService.delete(id);
+    }
 }
