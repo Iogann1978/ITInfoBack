@@ -1,8 +1,6 @@
 package ru.home.itinfo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
@@ -13,5 +11,6 @@ import javax.persistence.Entity;
 @SuperBuilder
 @Entity
 public class Course extends Info {
+    @EqualsAndHashCode.Exclude
     private Integer duration;
 }

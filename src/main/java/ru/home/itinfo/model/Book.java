@@ -12,11 +12,13 @@ import java.util.Set;
 @SuperBuilder
 @Entity
 public class Book extends Info {
+    @EqualsAndHashCode.Exclude
     private int pages;
+    @EqualsAndHashCode.Exclude
     private String isbn;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "BOOK_AUTHOR", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID")})
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BOOK_AUTHOR", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID")})
     private Set<Author> authors;
 }
