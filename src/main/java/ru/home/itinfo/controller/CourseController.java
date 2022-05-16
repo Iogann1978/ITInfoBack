@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.CourseDTO;
 import ru.home.itinfo.service.CourseService;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class CourseController {
 
     @GetMapping
     @Operation(summary = "Получить список курсов")
-    public List<CourseDTO> getAll() {
+    public Set<CourseDTO> getAll() {
         return courseService.getAll();
     }
 

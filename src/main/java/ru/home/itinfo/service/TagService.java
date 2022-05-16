@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.home.itinfo.dto.TagDTO;
 import ru.home.itinfo.mapper.TagMapper;
 import ru.home.itinfo.model.Tag;
-import ru.home.itinfo.repository.TagRepository;
+import ru.home.itinfo.repository.impl.TagRepository;
 
 @Service
 public class TagService extends CommonService<TagDTO, Tag, String> {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.service.BookService;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class BookController {
 
     @GetMapping
     @Operation(summary = "Получить список книг")
-    public List<BookDTO> getAll() {
+    public Set<BookDTO> getAll() {
         return bookService.getAll();
     }
 

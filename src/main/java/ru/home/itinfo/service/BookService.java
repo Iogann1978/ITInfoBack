@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.mapper.BookMapper;
 import ru.home.itinfo.model.Book;
-import ru.home.itinfo.repository.BookRepository;
+import ru.home.itinfo.repository.impl.BookRepository;
 
 @Service
 public class BookService extends CommonService<BookDTO, Book, Long> {

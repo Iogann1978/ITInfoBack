@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.home.itinfo.dto.DescriptDTO;
 import ru.home.itinfo.mapper.DescriptMapper;
 import ru.home.itinfo.model.Descript;
-import ru.home.itinfo.repository.DescriptRepository;
+import ru.home.itinfo.repository.impl.DescriptRepository;
 
 @Service
 public class DescriptService extends CommonService<DescriptDTO, Descript, Long> {

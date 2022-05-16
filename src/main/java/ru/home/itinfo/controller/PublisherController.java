@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.PublisherDTO;
 import ru.home.itinfo.service.PublisherService;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class PublisherController {
 
     @GetMapping
     @Operation(summary = "Получить список издателей")
-    public List<PublisherDTO> getAll() {
+    public Set<PublisherDTO> getAll() {
         return publisherService.getAll();
     }
 

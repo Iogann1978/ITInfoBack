@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -20,7 +19,8 @@ public class Info {
     @EqualsAndHashCode.Exclude
     protected String title;
     @EqualsAndHashCode.Exclude
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "PUBLISHER_ID")
     protected Publisher publisher;
     @EqualsAndHashCode.Exclude
@@ -29,15 +29,17 @@ public class Info {
     protected State state;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "INFO_TAG", joinColumns = {@JoinColumn(name = "INFO_ID")}, inverseJoinColumns = {@JoinColumn(name = "TAG")})
     protected Set<Tag> tags;
     @EqualsAndHashCode.Exclude
     protected int year;
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL)
-    protected List<Descript> descripts;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    protected Set<Descript> descripts;
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "info", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToOne(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     protected InfoFile file;
 }

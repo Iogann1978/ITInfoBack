@@ -14,7 +14,6 @@ public class Tag {
     @Id
     private String tag;
     @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<Info> infos;
 }

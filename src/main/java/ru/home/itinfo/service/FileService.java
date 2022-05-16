@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.home.itinfo.dto.InfoFileDTO;
 import ru.home.itinfo.mapper.InfoFileMapper;
 import ru.home.itinfo.model.InfoFile;
-import ru.home.itinfo.repository.FileRepository;
+import ru.home.itinfo.repository.impl.FileRepository;
 
 @Service
 public class FileService extends CommonService<InfoFileDTO, InfoFile, Long> {

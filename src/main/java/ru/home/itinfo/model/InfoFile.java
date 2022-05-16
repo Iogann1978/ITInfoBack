@@ -18,8 +18,7 @@ public class InfoFile {
     @EqualsAndHashCode.Exclude
     private Long size;
     @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFO_ID")
     private Info info;
 }

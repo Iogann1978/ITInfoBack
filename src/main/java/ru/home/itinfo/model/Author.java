@@ -17,7 +17,6 @@ public class Author {
     @EqualsAndHashCode.Exclude
     private String name;
     @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books;
 }

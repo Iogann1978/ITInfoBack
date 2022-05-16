@@ -16,6 +16,7 @@ public class Publisher {
     private Long id;
     @EqualsAndHashCode.Exclude
     private String name;
-    @OneToMany(mappedBy = "publisher")
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
     private Set<Info> infos;
 }

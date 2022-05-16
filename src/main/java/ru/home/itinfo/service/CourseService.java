@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.home.itinfo.dto.CourseDTO;
 import ru.home.itinfo.mapper.CourseMapper;
 import ru.home.itinfo.model.Course;
-import ru.home.itinfo.repository.CourseRepository;
+import ru.home.itinfo.repository.impl.CourseRepository;
 
 @Service
 public class CourseService extends CommonService<CourseDTO, Course, Long> {

@@ -1,20 +1,20 @@
 package ru.home.itinfo.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.home.itinfo.exception.NotFoundException;
 import ru.home.itinfo.mapper.CommonMapper;
+import ru.home.itinfo.repository.CommonRepository;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class CommonService<T1, T2, ID> {
-    private final JpaRepository<T2, ID> repository;
+    private final CommonRepository<T2, ID> repository;
     private final CommonMapper<T1, T2> commonMapper;
     private final String entityName;
 
     protected CommonService(
-            JpaRepository<T2, ID> repository,
+            CommonRepository<T2, ID> repository,
             CommonMapper<T1, T2> commonMapper,
             String entityName) {
         this.repository = repository;
@@ -23,9 +23,9 @@ public abstract class CommonService<T1, T2, ID> {
     }
 
     @Transactional(readOnly = true)
-    public List<T1> getAll() {
-        List<T2> list2 = repository.findAll();
-        return list2.stream().map(commonMapper::entityToDto).collect(Collectors.toList());
+    public Set<T1> getAll() {
+        Set<T2> list2 = repository.getListOrdered();
+        return list2.stream().map(commonMapper::entityToDto).collect(Collectors.toSet());
     }
 
     @Transactional(readOnly = true)
@@ -33,6 +33,11 @@ public abstract class CommonService<T1, T2, ID> {
         T2 t2 = repository.findById(id).orElseThrow(() ->
                 new NotFoundException(String.format("%s с id=%d не найден", entityName, id)));
         return commonMapper.entityToDto(t2);
+    }
+
+    @Transactional(readOnly = true)
+    public T2 getEntity(ID id) {
+        return repository.getById(id);
     }
 
     @Transactional
