@@ -22,4 +22,7 @@ public class InfoFileDTO {
     @Schema(description = "Размер")
     @JsonProperty("size")
     private Long size;
+    @Schema(description = "Название книги или курса")
+    @JsonProperty("title")
+    private String title;
 }

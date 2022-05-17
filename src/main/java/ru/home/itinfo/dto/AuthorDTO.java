@@ -19,4 +19,7 @@ public class AuthorDTO {
     @Schema(description = "Имя автора")
     @JsonProperty("name")
     private String name;
+    @Schema(description = "Количество книг автора")
+    @JsonProperty("count")
+    private Integer count;
 }

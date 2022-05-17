@@ -16,4 +16,7 @@ public class PublisherDTO {
     @Schema(description = "Наименование")
     @JsonProperty("name")
     private String name;
+    @Schema(description = "Количество книг или курсов издателя")
+    @JsonProperty("count")
+    private Integer count;
 }

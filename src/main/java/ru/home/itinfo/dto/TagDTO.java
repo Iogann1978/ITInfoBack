@@ -13,4 +13,7 @@ public class TagDTO {
     @Schema(description = "Наименование")
     @JsonProperty("tag")
     private String tag;
+    @Schema(description = "Количество книг или курсов по тэгу")
+    @JsonProperty("count")
+    private Integer count;
 }
