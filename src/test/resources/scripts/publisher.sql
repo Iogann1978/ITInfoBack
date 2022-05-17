@@ -1,0 +1,1 @@
+INSERT INTO PUBLISHER VALUES(3,'test publisher');

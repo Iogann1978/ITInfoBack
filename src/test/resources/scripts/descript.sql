@@ -1,0 +1,1 @@
+INSERT INTO DESCRIPT VALUES(5,'test descript',CAST(X'' AS BLOB),1);

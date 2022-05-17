@@ -1,0 +1,1 @@
+INSERT INTO INFO_FILE VALUES(4,'test_file.txt',321,1);

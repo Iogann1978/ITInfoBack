@@ -1,0 +1,1 @@
+INSERT INTO AUTHOR VALUES(2,'test author');
