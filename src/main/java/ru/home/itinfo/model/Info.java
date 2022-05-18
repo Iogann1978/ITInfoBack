@@ -36,7 +36,7 @@ public class Info {
     protected int year;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "info", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     protected Set<Descript> descripts;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

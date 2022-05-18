@@ -1,6 +1,8 @@
 package ru.home.itinfo.model;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -16,7 +18,7 @@ public class Descript {
     @EqualsAndHashCode.Exclude
     private String name;
     @EqualsAndHashCode.Exclude
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFO_ID")
     //@OnDelete(action = OnDeleteAction.CASCADE)
     private Info info;

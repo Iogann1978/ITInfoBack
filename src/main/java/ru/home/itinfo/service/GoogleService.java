@@ -37,7 +37,6 @@ public class GoogleService {
     private final PublisherService publisherService;
     private final AuthorService authorService;
     private final TagService tagService;
-    private final DescriptService descriptService;
 
     public BookDTO get(String isbn) throws NotFoundException {
         URI uri = UriComponentsBuilder.newInstance().scheme("https")
