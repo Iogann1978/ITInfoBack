@@ -14,6 +14,7 @@ public class InfoFile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @EqualsAndHashCode.Exclude
+    @Column(name = "FILENAME", nullable = false)
     private String filename;
     @EqualsAndHashCode.Exclude
     private Long size;

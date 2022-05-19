@@ -17,6 +17,7 @@ import ru.home.itinfo.model.*;
 import ru.home.itinfo.service.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Set;
 
 @DataJpaTest
@@ -141,6 +142,9 @@ public class ItInfoDbTests {
         Assertions.assertNotNull(derivedDescript.getInfo(), "derivedDescript.info is null");
     }
 
+    /**
+     * Проверка удаления описания. При удалении описания, оно должно удаляться из книги или курса
+     */
     @Test
     @Sql(scripts = {
             "classpath:scripts/publisher.sql",
@@ -151,27 +155,111 @@ public class ItInfoDbTests {
             "classpath:scripts/file.sql",
             "classpath:scripts/descript.sql"
     })
-    void getBookTest() {
-        Book dbBook1 = bookService.getEntity(1L);
-        Assertions.assertNotNull(dbBook1, "dbBook1 is null");
-        log.info("dbBook1: {}", dbBook1);
-        Assertions.assertNotNull(dbBook1.getDescripts(), "dbBook1.descripts is null");
-        Assertions.assertFalse(CollectionUtils.isEmpty(dbBook1.getDescripts()), "dbBook1.descripts is empty");
-        Assertions.assertEquals(1, dbBook1.getDescripts().size(), "dbBook1.descripts is not equals 1");
-        Descript dbDescript = dbBook1.getDescripts().stream().findFirst().orElse(null);
-        Assertions.assertNotNull(dbDescript, "dbDescript is null");
-        Assertions.assertNotNull(dbDescript.getInfo(), "dbDescript.info is null");
-        Assertions.assertNotNull(dbDescript.getInfo().getId(), "dbDescript.info.id is null");
-        log.info("dbDescript.info.id: {}", dbDescript.getInfo().getId());
-
+    void descriptDeleteTest() {
         descriptService.delete(5L);
         TestTransaction.flagForCommit();
         TestTransaction.end();
 
         TestTransaction.start();
-        Book dbBook2 = bookService.getEntity(1L);
-        Assertions.assertNotNull(dbBook2, "dbBook2 is null");
-        log.info("dbBook2: {}", dbBook2);
-        Assertions.assertTrue(CollectionUtils.isEmpty(dbBook2.getDescripts()), "dbBook2.descripts is not empty");
+        Book dbBook = bookService.getEntity(1L);
+        Assertions.assertNotNull(dbBook, "dbBook is null");
+        log.info("dbBook: {}", dbBook);
+        Assertions.assertTrue(CollectionUtils.isEmpty(dbBook.getDescripts()), "dbBook.descripts is not empty");
+    }
+
+    /**
+     * Проверка добавления нового описания в книгу и сохранение книги вместе с описанием
+     */
+    @Test
+    void descriptNewSaveTest() {
+        Descript descript = Descript.builder()
+                .name("test descript")
+                .text("Test".getBytes(StandardCharsets.UTF_8))
+                .build();
+        Publisher publisher = Publisher.builder()
+                .name("test publisher")
+                .build();
+        Book book = Book.builder()
+                .isbn("1234567890")
+                .title("Test book")
+                .pages(3)
+                .rate(Rate.GOOD)
+                .state(State.PLANNED)
+                .year(2007)
+                .publisher(publisher)
+                .descripts(Set.of(descript))
+                .build();
+        descript.setInfo(book);
+        Book savedBook = bookService.saveEntity(book);
+        TestTransaction.flagForCommit();
+        TestTransaction.end();
+
+        TestTransaction.start();
+        Book derivedBook = bookService.getEntity(savedBook.getId());
+        Assertions.assertNotNull(derivedBook, "derivedBook is null");
+        log.info("derivedBook: {}", derivedBook);
+        Assertions.assertNotNull(derivedBook.getDescripts(), "derivedBook.descripts is null");
+        Assertions.assertFalse(CollectionUtils.isEmpty(derivedBook.getDescripts()), "derivedBook.descripts is empty");
+        Assertions.assertEquals(1, derivedBook.getDescripts().size(), "derivedBook.descripts is not equals 1");
+        log.info("derivedBook.descripts: {}", derivedBook.getDescripts());
+        Descript derivedDescript = derivedBook.getDescripts().stream().findFirst().orElse(null);
+        Assertions.assertNotNull(derivedDescript, "derivedDescript is null");
+        Assertions.assertNotNull(derivedDescript.getId(), "derivedDescript.id is null");
+        Assertions.assertNotNull(derivedDescript.getInfo(), "derivedDescript.info is null");
+        Assertions.assertNotNull(derivedDescript.getInfo().getId(), "derivedDescript.info.id is null");
+        log.info("derivedDescript: {}", derivedDescript);
+    }
+
+    /**
+     * Проверка удаления файла
+     */
+    @Test
+    @Sql(scripts = {
+            "classpath:scripts/publisher.sql",
+            "classpath:scripts/author.sql",
+            "classpath:scripts/info.sql",
+            "classpath:scripts/book.sql",
+            "classpath:scripts/tag.sql",
+            "classpath:scripts/file.sql"
+    })
+    void fileDeleteTest() {
+        fileService.delete(4L);
+        TestTransaction.flagForCommit();
+        TestTransaction.end();
+
+        TestTransaction.start();
+        Book dbBook = bookService.getEntity(1L);
+        Assertions.assertNotNull(dbBook, "dbBook is null");
+        log.info("dbBook: {}", dbBook);
+        Assertions.assertNull(dbBook.getFile(), "dbBook.file is not empty");
+    }
+
+    /**
+     * Проверка удаления тэга
+     */
+    @Test
+    @Sql(scripts = {
+            "classpath:scripts/publisher.sql",
+            "classpath:scripts/author.sql",
+            "classpath:scripts/info.sql",
+            "classpath:scripts/book.sql",
+            "classpath:scripts/tag.sql"
+    })
+    void tagDeleteTest() {
+        Book book = bookService.getEntity(1L);
+        Assertions.assertNotNull(book, "book is null");
+        Assertions.assertFalse(CollectionUtils.isEmpty(book.getTags()), "book.tags is empty");
+        Assertions.assertEquals(1, book.getTags().size(), "book has mothe than 1 tag");
+        book.setTags(Collections.EMPTY_SET);
+        bookService.saveEntity(book);
+        tagService.delete("Java");
+        TestTransaction.flagForCommit();
+        TestTransaction.end();
+
+        TestTransaction.start();
+        Book dbBook = bookService.getEntity(1L);
+        Assertions.assertNotNull(dbBook, "dbBook is null");
+        log.info("dbBook: {}", dbBook);
+        Assertions.assertTrue(CollectionUtils.isEmpty(dbBook.getTags()), "dbBook.tags is not empty");
     }
 }

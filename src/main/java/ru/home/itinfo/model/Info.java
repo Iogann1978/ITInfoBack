@@ -17,15 +17,18 @@ public class Info {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
     @EqualsAndHashCode.Exclude
+    @Column(name = "TITLE", nullable = false)
     protected String title;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PUBLISHER_ID")
+    @JoinColumn(name = "PUBLISHER_ID", nullable = false)
     protected Publisher publisher;
     @EqualsAndHashCode.Exclude
+    @Column(name = "RATE", nullable = false)
     protected Rate rate;
     @EqualsAndHashCode.Exclude
+    @Column(name = "STATE", nullable = false)
     protected State state;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -36,7 +39,7 @@ public class Info {
     protected int year;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "info", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "info", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
     protected Set<Descript> descripts;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
