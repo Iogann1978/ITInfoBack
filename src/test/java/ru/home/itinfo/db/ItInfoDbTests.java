@@ -171,12 +171,14 @@ public class ItInfoDbTests {
      * Проверка добавления нового описания в книгу и сохранение книги вместе с описанием
      */
     @Test
+    @Sql(scripts = {"classpath:scripts/publisher.sql"})
     void descriptNewSaveTest() {
         Descript descript = Descript.builder()
                 .name("test descript")
                 .text("Test".getBytes(StandardCharsets.UTF_8))
                 .build();
         Publisher publisher = Publisher.builder()
+                .id(3L)
                 .name("test publisher")
                 .build();
         Book book = Book.builder()

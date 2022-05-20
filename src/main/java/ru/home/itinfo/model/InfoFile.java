@@ -8,18 +8,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class InfoFile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @EqualsAndHashCode.Exclude
     @Column(name = "FILENAME", nullable = false)
     private String filename;
-    @EqualsAndHashCode.Exclude
     private Long size;
-    @EqualsAndHashCode.Exclude
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "INFO_ID")
     private Info info;
 }

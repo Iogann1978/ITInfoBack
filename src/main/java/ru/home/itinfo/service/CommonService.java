@@ -1,5 +1,6 @@
 package ru.home.itinfo.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import ru.home.itinfo.exception.NotFoundException;
 import ru.home.itinfo.mapper.CommonMapper;
@@ -8,6 +9,7 @@ import ru.home.itinfo.repository.CommonRepository;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 public abstract class CommonService<T1, T2, ID> {
     private final CommonRepository<T2, ID> repository;
     private final CommonMapper<T1, T2> commonMapper;
@@ -24,8 +26,10 @@ public abstract class CommonService<T1, T2, ID> {
 
     @Transactional(readOnly = true)
     public Set<T1> getAll() {
-        Set<T2> list2 = repository.getListOrdered();
-        return list2.stream().map(commonMapper::entityToDto).collect(Collectors.toSet());
+        Set<T2> list = repository.getListOrdered();
+        log.info("list size: {} {}", list.size(), entityName);
+        list.stream().forEach(l -> log.info("{} {}", l, l.hashCode()));
+        return list.stream().map(commonMapper::entityToDto).collect(Collectors.toSet());
     }
 
     @Transactional(readOnly = true)

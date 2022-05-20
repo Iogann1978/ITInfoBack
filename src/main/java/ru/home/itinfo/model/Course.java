@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class Course extends Info {
-    @EqualsAndHashCode.Exclude
     private Integer duration;
 }

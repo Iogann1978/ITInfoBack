@@ -8,19 +8,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class Descript {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @EqualsAndHashCode.Exclude
     @Column(name = "NAME", nullable = false)
     private String name;
-    @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "INFO_ID")
     private Info info;
-    @EqualsAndHashCode.Exclude
     @Lob
     @Column(length = 1000)
     private byte[] text;
