@@ -27,8 +27,6 @@ public abstract class CommonService<T1, T2, ID> {
     @Transactional(readOnly = true)
     public Set<T1> getAll() {
         Set<T2> list = repository.getListOrdered();
-        log.info("list size: {} {}", list.size(), entityName);
-        list.stream().forEach(l -> log.info("{} {}", l, l.hashCode()));
         return list.stream().map(commonMapper::entityToDto).collect(Collectors.toSet());
     }
 

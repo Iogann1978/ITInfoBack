@@ -20,6 +20,6 @@ public class AuthorDTO {
     @JsonProperty("name")
     private String name;
     @Schema(description = "Количество книг автора")
-    @JsonProperty("count")
+    @JsonProperty("infoCount")
     private Integer count;
 }

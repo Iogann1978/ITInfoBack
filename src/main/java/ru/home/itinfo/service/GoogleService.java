@@ -39,6 +39,9 @@ public class GoogleService {
     private final TagService tagService;
 
     public BookDTO get(String isbn) throws NotFoundException {
+        log.info("isbn old: {}", isbn);
+        isbn = isbn.trim().replace("-","");
+        log.info("isbn new: {}", isbn);
         URI uri = UriComponentsBuilder.newInstance().scheme("https")
                 .host(googleApiHost).path(googleApiPath).query("q=isbn:{isbn}").build(isbn);
         VolumeDTO volumeDTO = restTemplate.getForObject(uri, VolumeDTO.class);
