@@ -3,13 +3,14 @@ package ru.home.itinfo.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "name"})
 @Entity
 public class Author {
     @Id
@@ -19,4 +20,11 @@ public class Author {
     private String name;
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Book> books;
+
+    public void addBook(Book book) {
+        if (books == null) {
+            books = new HashSet<>();
+        }
+        books.add(book);
+    }
 }

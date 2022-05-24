@@ -8,7 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "name"})
 @Entity
 public class Descript {
     @Id
@@ -16,7 +16,7 @@ public class Descript {
     private Long id;
     @Column(name = "NAME", nullable = false)
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFO_ID")
     private Info info;
     @Lob

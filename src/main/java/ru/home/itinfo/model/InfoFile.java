@@ -8,7 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "filename"})
 @Entity
 public class InfoFile {
     @Id
@@ -17,7 +17,7 @@ public class InfoFile {
     @Column(name = "FILENAME", nullable = false)
     private String filename;
     private Long size;
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFO_ID")
     private Info info;
 }

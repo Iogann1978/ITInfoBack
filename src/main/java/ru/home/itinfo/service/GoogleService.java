@@ -58,6 +58,7 @@ public class GoogleService {
                     PublisherDTO publisherDTO = publisherMapper.entityToDto(publisher);
                     bookDTO.setPublisher(publisherDTO);
                 });
+        /*
         if (!CollectionUtils.isEmpty(bookDTO.getAuthors())) {
             Set<AuthorDTO> authors = bookDTO.getAuthors().stream()
                     .filter(author -> author != null && !author.getName().isEmpty())
@@ -66,6 +67,7 @@ public class GoogleService {
                     .map(authorMapper::entityToDto).collect(Collectors.toSet());
             bookDTO.setAuthors(authors);
         }
+         */
         if (!CollectionUtils.isEmpty(bookDTO.getTags())) {
             Set<TagDTO> tags = bookDTO.getTags().stream()
                     .filter(tag -> tag != null && !tag.getTag().isEmpty())

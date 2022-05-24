@@ -11,7 +11,7 @@ import java.util.Set;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "title"})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Info {
@@ -34,7 +34,7 @@ public class Info {
     protected Set<Tag> tags;
     protected int year;
     @ToString.Exclude
-    @OneToMany(mappedBy = "info", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     protected Set<Descript> descripts;
     @ToString.Exclude
     @OneToOne(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -55,5 +55,9 @@ public class Info {
                 t.addInfo(this);
             }
         }
+        prepersist_child();
+    }
+
+    protected void prepersist_child() {
     }
 }

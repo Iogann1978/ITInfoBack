@@ -17,7 +17,7 @@ public class DescriptDTO {
     @JsonProperty("id")
     private Long id;
     @Schema(description = "Id информации")
-    @JsonProperty("info_id")
+    @JsonProperty("infoId")
     private Long infoId;
     @Schema(description = "Наименование")
     @JsonProperty("name")
