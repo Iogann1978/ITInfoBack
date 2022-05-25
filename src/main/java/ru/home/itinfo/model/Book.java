@@ -17,7 +17,7 @@ public class Book extends Info {
     private int pages;
     private String isbn;
     @ToString.Exclude
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "BOOK_AUTHOR", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID")})
     private Set<Author> authors;
 

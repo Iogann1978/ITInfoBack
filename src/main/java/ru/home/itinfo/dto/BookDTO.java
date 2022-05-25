@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -22,4 +23,11 @@ public class BookDTO extends InfoDTO {
     @Schema(description = "Авторы книги")
     @JsonProperty("authors")
     private Set<AuthorDTO> authors;
+
+    public void addAuthor(AuthorDTO author) {
+        if (authors == null) {
+            authors = new HashSet<>();
+        }
+        authors.add(author);
+    }
 }

@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.BookDTO;
@@ -15,6 +16,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @RequestMapping("/book")
 @Tag(name = "BookController", description = "Контроллер работы с книгами")
+@Slf4j
 public class BookController {
     private final BookService bookService;
 
@@ -40,6 +42,8 @@ public class BookController {
             @Parameter(description = "Книга")
             @RequestBody BookDTO bookDTO
     ) {
+        bookService.merge(bookDTO);
+        log.info("bookDTO: {}", bookDTO);
         bookService.save(bookDTO);
     }
 
