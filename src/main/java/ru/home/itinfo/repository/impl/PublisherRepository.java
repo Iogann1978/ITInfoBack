@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Publisher;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface PublisherRepository extends CommonRepository<Publisher, Long> {
@@ -18,6 +18,6 @@ public interface PublisherRepository extends CommonRepository<Publisher, Long> {
     @EntityGraph(attributePaths = {"infos"})
     Publisher getById(Long id);
     @EntityGraph(attributePaths = {"infos"})
-    @Query("select p from Publisher p order by p.name")
-    Set<Publisher> getListOrdered();
+    @Query("select distinct p from Publisher p left join fetch p.infos order by p.name")
+    List<Publisher> getListOrdered();
 }

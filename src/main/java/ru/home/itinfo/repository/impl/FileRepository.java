@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.InfoFile;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface FileRepository extends CommonRepository<InfoFile, Long> {
@@ -17,5 +17,5 @@ public interface FileRepository extends CommonRepository<InfoFile, Long> {
     InfoFile getById(Long id);
     @EntityGraph(attributePaths = {"info"})
     @Query("select f from InfoFile f order by f.filename")
-    Set<InfoFile> getListOrdered();
+    List<InfoFile> getListOrdered();
 }

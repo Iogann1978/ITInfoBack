@@ -20,6 +20,6 @@ public class Descript {
     @JoinColumn(name = "INFO_ID")
     private Info info;
     @Lob
-    @Column(length = 1000)
+    @Column(length = 10000)
     private byte[] text;
 }

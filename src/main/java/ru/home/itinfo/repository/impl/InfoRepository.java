@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Info;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +17,6 @@ public interface InfoRepository extends CommonRepository<Info, Long> {
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
     Info getById(Long id);
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
-    @Query("select i from Info i order by i.title")
-    Set<Info> getListOrdered();
+    @Query("select distinct i from Info i left join fetch i.tags left join fetch i.descripts order by i.title")
+    List<Info> getListOrdered();
 }

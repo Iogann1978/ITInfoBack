@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Course;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface CourseRepository extends CommonRepository<Course, Long> {
@@ -16,6 +16,6 @@ public interface CourseRepository extends CommonRepository<Course, Long> {
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
     Course getById(Long id);
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
-    @Query("select c from Course c order by c.title")
-    Set<Course> getListOrdered();
+    @Query("select distinct c from Course c left join fetch c.tags left join fetch c.descripts order by c.title")
+    List<Course> getListOrdered();
 }

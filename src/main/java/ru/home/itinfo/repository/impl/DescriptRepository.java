@@ -6,16 +6,16 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Descript;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface DescriptRepository extends CommonRepository<Descript, Long> {
     @EntityGraph(attributePaths = {"info"})
     Optional<Descript> findById(Long id);
-    @EntityGraph("descript")
+    @EntityGraph(attributePaths = {"info"})
     Descript getById(Long id);
-    @EntityGraph("descripts")
+    @EntityGraph(attributePaths = {"info"})
     @Query("select d from Descript d order by d.name")
-    Set<Descript> getListOrdered();
+    List<Descript> getListOrdered();
 }

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Author;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface AuthorRepository extends CommonRepository<Author, Long> {
@@ -18,6 +18,6 @@ public interface AuthorRepository extends CommonRepository<Author, Long> {
     @EntityGraph(attributePaths = {"books"})
     Optional<Author> findFirstByName(String name);
     @EntityGraph(attributePaths = {"books"})
-    @Query("select a from Author a order by a.name")
-    Set<Author> getListOrdered();
+    @Query("select distinct a from Author a left join fetch a.books order by a.name")
+    List<Author> getListOrdered();
 }

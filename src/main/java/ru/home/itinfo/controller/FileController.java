@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.InfoFileDTO;
 import ru.home.itinfo.service.FileService;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class FileController {
 
     @GetMapping
     @Operation(summary = "Получить список файлов")
-    public Set<InfoFileDTO> getAll() {
+    public List<InfoFileDTO> getAll() {
         return fileService.getAll();
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.TagDTO;
 import ru.home.itinfo.service.TagService;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class TagController {
 
     @GetMapping
     @Operation(summary = "Получить список тэгов")
-    public Set<TagDTO> getAll() {
+    public List<TagDTO> getAll() {
         return tagService.getAll();
     }
 

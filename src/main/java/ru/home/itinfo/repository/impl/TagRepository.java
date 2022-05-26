@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ru.home.itinfo.model.Tag;
 import ru.home.itinfo.repository.CommonRepository;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface TagRepository extends CommonRepository<Tag, String> {
@@ -16,6 +16,6 @@ public interface TagRepository extends CommonRepository<Tag, String> {
     @EntityGraph(attributePaths = {"infos"})
     Tag getById(String tag);
     @EntityGraph(attributePaths = {"infos"})
-    @Query("select t from Tag t order by t.tag")
-    Set<Tag> getListOrdered();
+    @Query("select distinct t from Tag t left join fetch t.infos order by t.tag")
+    List<Tag> getListOrdered();
 }

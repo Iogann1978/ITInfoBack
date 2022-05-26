@@ -2,7 +2,7 @@ package ru.home.itinfo.model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.util.CollectionUtils;
+import ru.home.itinfo.listener.InfoEntityListener;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,6 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"id", "title"})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@EntityListeners(InfoEntityListener.class)
 public class Info {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,25 +40,4 @@ public class Info {
     @ToString.Exclude
     @OneToOne(mappedBy = "info", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     protected InfoFile file;
-
-    @PrePersist
-    public void prepersist() {
-        if (!CollectionUtils.isEmpty(descripts)) {
-            for (Descript d : descripts) {
-                d.setInfo(this);
-            }
-        }
-        if (file != null) {
-            file.setInfo(this);
-        }
-        if (!CollectionUtils.isEmpty(tags)) {
-            for (Tag t : tags) {
-                t.addInfo(this);
-            }
-        }
-        prepersist_child();
-    }
-
-    protected void prepersist_child() {
-    }
 }

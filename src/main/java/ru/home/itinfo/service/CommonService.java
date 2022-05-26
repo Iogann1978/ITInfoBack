@@ -6,7 +6,7 @@ import ru.home.itinfo.exception.NotFoundException;
 import ru.home.itinfo.mapper.CommonMapper;
 import ru.home.itinfo.repository.CommonRepository;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,9 +25,9 @@ public abstract class CommonService<T1, T2, ID> {
     }
 
     @Transactional(readOnly = true)
-    public Set<T1> getAll() {
-        Set<T2> list = repository.getListOrdered();
-        return list.stream().map(commonMapper::entityToDto).collect(Collectors.toSet());
+    public List<T1> getAll() {
+        List<T2> list = repository.getListOrdered();
+        return list.stream().map(commonMapper::entityToDto).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

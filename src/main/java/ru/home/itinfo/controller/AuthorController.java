@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.home.itinfo.dto.AuthorDTO;
 import ru.home.itinfo.service.AuthorService;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class AuthorController {
 
     @GetMapping
     @Operation(summary = "Получить список авторов")
-    public Set<AuthorDTO> getAll() {
+    public List<AuthorDTO> getAll() {
         return authorService.getAll();
     }
 
