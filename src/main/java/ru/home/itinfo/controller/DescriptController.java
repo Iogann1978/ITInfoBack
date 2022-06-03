@@ -12,6 +12,7 @@ import ru.home.itinfo.dto.DescriptDTO;
 import ru.home.itinfo.service.DescriptService;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class DescriptController {
     }
 
     @PostMapping("/{id}")
-    @Operation(summary = "Обновить описание")
+    @Operation(summary = "Загрузить описание из файла")
     public void descriptUpload(
             @Parameter(description = "id описания")
             @PathVariable Long id,
@@ -39,9 +40,14 @@ public class DescriptController {
             @RequestParam("file") MultipartFile file
     ) {
         try {
-            log.info("file: {} {}", id, new String(file.getBytes()));
+            DescriptDTO descriptDTO = DescriptDTO.builder()
+                    .text(file.getBytes())
+                    .name(file.getOriginalFilename())
+                    .infoId(id)
+                    .build();
+            descriptService.save(descriptDTO);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
