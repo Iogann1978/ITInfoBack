@@ -13,11 +13,9 @@ public class BookEntityListener {
     @PrePersist
     @PreUpdate
     public void prepersist(Book book) {
-        log.info("prepersist book");
         if (!CollectionUtils.isEmpty(book.getAuthors())) {
             for (Author a : book.getAuthors()) {
                 a.addBook(book);
-                log.info("a: {}", a);
             }
         }
     }

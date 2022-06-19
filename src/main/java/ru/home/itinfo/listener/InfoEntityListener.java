@@ -14,11 +14,9 @@ public class InfoEntityListener {
     @PrePersist
     @PreUpdate
     public void prepersist(Info info) {
-        log.info("prepersist info");
         if (!CollectionUtils.isEmpty(info.getDescripts())) {
             for (Descript d : info.getDescripts()) {
                 d.setInfo(info);
-                log.info("d: {}", d);
             }
         }
         if (info.getFile() != null) {

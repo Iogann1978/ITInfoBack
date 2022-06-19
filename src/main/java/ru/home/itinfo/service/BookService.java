@@ -26,7 +26,6 @@ public class BookService extends CommonService<BookDTO, Book, Long> {
     }
 
     public void merge(BookDTO dto) {
-        log.info("tags: {}", dto.getTags());
         if (!CollectionUtils.isEmpty(dto.getAuthors())) {
             for (AuthorDTO a : dto.getAuthors()) {
                 Author na = authorService.getAuthor(a.getName().trim());
