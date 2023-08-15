@@ -20,4 +20,6 @@ public interface AuthorRepository extends CommonRepository<Author, Long> {
     @EntityGraph(attributePaths = {"books"})
     @Query("select distinct a from Author a left join fetch a.books order by a.name")
     List<Author> getListOrdered();
+    @EntityGraph(attributePaths = {"books"})
+    List<Author> getAllByNameLike(String author);
 }
