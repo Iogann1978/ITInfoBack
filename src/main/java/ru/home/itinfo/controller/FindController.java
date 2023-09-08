@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.dto.InfoDTO;
-import ru.home.itinfo.service.AuthorService;
-import ru.home.itinfo.service.InfoService;
-import ru.home.itinfo.service.PublisherService;
-import ru.home.itinfo.service.TagService;
+import ru.home.itinfo.service.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,18 +25,15 @@ public class FindController {
     private final PublisherService publisherService;
     private final TagService tagService;
     private final AuthorService authorService;
+    private final DescriptService descriptService;
 
     @GetMapping("/info")
     @Operation(summary = "Получить список авторов")
     public List<InfoDTO> findInfo(
             @Parameter(description = "Название")
             @RequestParam String title,
-            @Parameter(description = "Содержание")
-            @RequestParam String content,
             @Parameter(description = "Описание")
             @RequestParam String descript,
-            @Parameter(description = "Автор")
-            @RequestParam String author,
             @Parameter(description = "Тэг")
             @RequestParam String tag,
             @Parameter(description = "Издатель")
@@ -48,10 +42,8 @@ public class FindController {
         List<InfoDTO> list = Collections.EMPTY_LIST;
         if (StringUtils.isNotEmpty(title)) {
             list = infoService.findByTitle(title);
-        } else if (StringUtils.isNotEmpty(content)) {
-
         } else if (StringUtils.isNotEmpty(descript)) {
-
+            list = descriptService.findByText(descript);
         } else if (StringUtils.isNotEmpty(tag)) {
             list = tagService.findByTag(tag);
         } else if (StringUtils.isNotEmpty(publisher)) {

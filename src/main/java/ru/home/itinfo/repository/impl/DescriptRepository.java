@@ -18,4 +18,6 @@ public interface DescriptRepository extends CommonRepository<Descript, Long> {
     @EntityGraph(attributePaths = {"info"})
     @Query("select d from Descript d order by d.name")
     List<Descript> getListOrdered();
+    @EntityGraph(attributePaths = {"info"})
+    List<Descript> findAllByTextLike(String text);
 }
