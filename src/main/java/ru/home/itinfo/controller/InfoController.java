@@ -10,7 +10,7 @@ import ru.home.itinfo.service.InfoService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/info")
+@RequestMapping("/api/info")
 @Tag(name = "InfoController", description = "Контроллер работы с общей информацией")
 public class InfoController {
     private final InfoService infoService;

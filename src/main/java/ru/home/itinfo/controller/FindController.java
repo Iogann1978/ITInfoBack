@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/find")
+@RequestMapping("/api/find")
 @Tag(name = "FindController", description = "Контроллер для поиска")
 public class FindController {
     private final InfoService infoService;

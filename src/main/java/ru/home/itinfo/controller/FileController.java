@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/file")
+@RequestMapping("/api/file")
 @Tag(name = "FileController", description = "Контроллер работы с файлами")
 public class FileController {
     private final FileService fileService;

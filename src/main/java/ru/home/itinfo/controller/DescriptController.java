@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/descript")
+@RequestMapping("/api/descript")
 @Tag(name = "DescriptController", description = "Контроллер работы с описанием")
 @Slf4j
 public class DescriptController {

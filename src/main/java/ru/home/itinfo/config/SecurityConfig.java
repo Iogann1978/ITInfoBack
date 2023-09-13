@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         config.setMaxAge(3600L);
                         return config;
                     })
+                .and().headers().contentTypeOptions().disable()
                 .and().csrf().disable();
     }
 }
