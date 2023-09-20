@@ -12,10 +12,16 @@ import ru.home.itinfo.model.Author;
 import ru.home.itinfo.model.Book;
 import ru.home.itinfo.repository.impl.BookRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class BookService extends CommonService<BookDTO, Book, Long> {
     private final AuthorService authorService;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
+
     @Autowired
     public BookService(
             BookRepository bookRepository,
@@ -23,6 +29,8 @@ public class BookService extends CommonService<BookDTO, Book, Long> {
             BookMapper bookMapper) {
         super(bookRepository, bookMapper, "Книга");
         this.authorService = authorService;
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
     public void merge(BookDTO dto) {
@@ -38,5 +46,10 @@ public class BookService extends CommonService<BookDTO, Book, Long> {
                 d.setInfoId(dto.getId());
             }
         }
+    }
+
+    public List<BookDTO> findByIsbn(String isbn) {
+        return bookRepository.findAllByIsbn(isbn)
+                .stream().map(bookMapper::entityToDto).collect(Collectors.toList());
     }
 }

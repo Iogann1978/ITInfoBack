@@ -18,4 +18,6 @@ public interface BookRepository extends CommonRepository<Book, Long> {
     @EntityGraph(attributePaths = {"publisher", "tags", "authors", "descripts", "file"})
     @Query("select distinct b from Book b left join fetch b.tags left join fetch b.authors left join fetch b.descripts order by b.title")
     List<Book> getListOrdered();
+    @EntityGraph(attributePaths = {"publisher", "tags", "authors", "descripts", "file"})
+    List<Book> findAllByIsbn(String isbn);
 }

@@ -26,6 +26,7 @@ public class FindController {
     private final TagService tagService;
     private final AuthorService authorService;
     private final DescriptService descriptService;
+    private final BookService bookService;
 
     @GetMapping("/info")
     @Operation(summary = "Получить список авторов")
@@ -56,11 +57,15 @@ public class FindController {
     @Operation(summary = "Получить список авторов")
     public List<BookDTO> findBook(
             @Parameter(description = "Автор")
-            @RequestParam String author
+            @RequestParam String author,
+            @Parameter(description = "ISBN")
+            @RequestParam String isbn
     ) {
         List<BookDTO> list = Collections.EMPTY_LIST;
         if (StringUtils.isNotEmpty(author)) {
             list = authorService.findByAuthor(author);
+        } else if (StringUtils.isNotEmpty(isbn)) {
+            list = bookService.findByIsbn(isbn);
         }
         return list;
     }
