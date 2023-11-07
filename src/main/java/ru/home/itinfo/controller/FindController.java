@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.home.itinfo.dto.BookDTO;
+import ru.home.itinfo.dto.FindDTO;
 import ru.home.itinfo.dto.InfoDTO;
+import ru.home.itinfo.mapper.FindMapper;
 import ru.home.itinfo.service.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,10 +30,11 @@ public class FindController {
     private final AuthorService authorService;
     private final DescriptService descriptService;
     private final BookService bookService;
+    private final FindMapper findMapper;
 
     @GetMapping("/info")
-    @Operation(summary = "Получить список авторов")
-    public List<InfoDTO> findInfo(
+    @Operation(summary = "Получить список найденых курсов и книг")
+    public List<FindDTO> findInfo(
             @Parameter(description = "Название")
             @RequestParam String title,
             @Parameter(description = "Описание")
@@ -50,12 +54,12 @@ public class FindController {
         } else if (StringUtils.isNotEmpty(publisher)) {
             list = publisherService.findByPublisher(publisher);
         }
-        return list;
+        return list.stream().map(findMapper::fromInfoDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/book")
-    @Operation(summary = "Получить список авторов")
-    public List<BookDTO> findBook(
+    @Operation(summary = "Получить список найденых книг")
+    public List<FindDTO> findBook(
             @Parameter(description = "Автор")
             @RequestParam String author,
             @Parameter(description = "ISBN")
@@ -67,6 +71,6 @@ public class FindController {
         } else if (StringUtils.isNotEmpty(isbn)) {
             list = bookService.findByIsbn(isbn);
         }
-        return list;
+        return list.stream().map(findMapper::fromBook).collect(Collectors.toList());
     }
 }
