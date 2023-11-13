@@ -36,13 +36,13 @@ public class FindController {
     @Operation(summary = "Получить список найденых курсов и книг")
     public List<FindDTO> findInfo(
             @Parameter(description = "Название")
-            @RequestParam String title,
+            @RequestParam(required = false) String title,
             @Parameter(description = "Описание")
-            @RequestParam String descript,
+            @RequestParam(required = false)  String descript,
             @Parameter(description = "Тэг")
-            @RequestParam String tag,
+            @RequestParam(required = false)  String tag,
             @Parameter(description = "Издатель")
-            @RequestParam String publisher
+            @RequestParam(required = false)  String publisher
     ) {
         List<InfoDTO> list = Collections.EMPTY_LIST;
         if (StringUtils.isNotEmpty(title)) {
@@ -61,9 +61,9 @@ public class FindController {
     @Operation(summary = "Получить список найденых книг")
     public List<FindDTO> findBook(
             @Parameter(description = "Автор")
-            @RequestParam String author,
+            @RequestParam(required = false)  String author,
             @Parameter(description = "ISBN")
-            @RequestParam String isbn
+            @RequestParam(required = false)  String isbn
     ) {
         List<BookDTO> list = Collections.EMPTY_LIST;
         if (StringUtils.isNotEmpty(author)) {
