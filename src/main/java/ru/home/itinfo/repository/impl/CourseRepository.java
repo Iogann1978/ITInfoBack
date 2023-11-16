@@ -18,4 +18,6 @@ public interface CourseRepository extends CommonRepository<Course, Long> {
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
     @Query("select distinct c from Course c left join fetch c.tags left join fetch c.descripts order by c.title")
     List<Course> getListOrdered();
+    @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
+    List<Course> getAllByTitleLike(String title);
 }

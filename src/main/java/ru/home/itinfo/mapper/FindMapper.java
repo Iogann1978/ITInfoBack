@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import ru.home.itinfo.dto.BookDTO;
+import ru.home.itinfo.dto.CourseDTO;
 import ru.home.itinfo.dto.FindDTO;
 import ru.home.itinfo.dto.InfoDTO;
 
@@ -12,9 +13,9 @@ public interface FindMapper {
     @Mappings(
         @Mapping(target = "type", expression = "java(ru.home.itinfo.dto.FindDTO.FindType.BOOK)")
     )
-    FindDTO fromBook(BookDTO bookDto);
+    FindDTO fromInfoDTO(BookDTO bookDTO);
     @Mappings(
-            @Mapping(target = "type", expression = "java(infoDTO instanceof ru.home.itinfo.dto.BookDTO ? ru.home.itinfo.dto.FindDTO.FindType.BOOK : ru.home.itinfo.dto.FindDTO.FindType.COURSE)")
+            @Mapping(target = "type", expression = "java(ru.home.itinfo.dto.FindDTO.FindType.COURSE)")
     )
-    FindDTO fromInfoDTO(InfoDTO infoDTO);
+    FindDTO fromInfoDTO(CourseDTO courseDTO);
 }

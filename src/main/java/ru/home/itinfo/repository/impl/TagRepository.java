@@ -19,5 +19,5 @@ public interface TagRepository extends CommonRepository<Tag, String> {
     @Query("select distinct t from Tag t left join fetch t.infos order by t.tag")
     List<Tag> getListOrdered();
     @EntityGraph(attributePaths = {"infos"})
-    List<Tag> getAllByTagLike(String tag);
+    List<Tag> getAllByTag(String tag);
 }

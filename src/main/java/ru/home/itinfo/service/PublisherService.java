@@ -2,9 +2,8 @@ package ru.home.itinfo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.home.itinfo.dto.InfoDTO;
+import ru.home.itinfo.dto.FindDTO;
 import ru.home.itinfo.dto.PublisherDTO;
-import ru.home.itinfo.mapper.InfoMapper;
 import ru.home.itinfo.mapper.PublisherMapper;
 import ru.home.itinfo.model.Publisher;
 import ru.home.itinfo.repository.impl.PublisherRepository;
@@ -15,16 +14,16 @@ import java.util.stream.Collectors;
 @Service
 public class PublisherService extends CommonService<PublisherDTO, Publisher, Long> {
     private final PublisherRepository publisherRepository;
-    private final InfoMapper infoMapper;
+    private final BookService bookService;
 
     @Autowired
     public PublisherService(
             PublisherRepository publisherRepository,
             PublisherMapper publisherMapper,
-            InfoMapper infoMapper) {
+            BookService bookService) {
         super(publisherRepository, publisherMapper, "Издатель");
         this.publisherRepository = publisherRepository;
-        this.infoMapper = infoMapper;
+        this.bookService = bookService;
     }
 
     public Publisher getPublisher(String name) {
@@ -32,9 +31,14 @@ public class PublisherService extends CommonService<PublisherDTO, Publisher, Lon
                 .orElseGet(() -> saveEntity(Publisher.builder().name(name).build()));
     }
 
-    public List<InfoDTO> findByPublisher(String publisher) {
-        return publisherRepository.getAllByNameLike(publisher).stream()
-                .flatMap(p -> p.getInfos().stream()).map(infoMapper::entityToDto)
-                .collect(Collectors.toList());
+    public List<FindDTO> findByPublisher(String publisher) {
+        return publisherRepository.getAllByName(publisher).stream()
+                .flatMap(p -> p.getInfos().stream())
+                .map(info ->
+                        FindDTO.builder()
+                                .title(info.getTitle())
+                                .type(bookService.existsById(info.getId()) ? FindDTO.FindType.BOOK : FindDTO.FindType.COURSE)
+                                .build()
+                ).collect(Collectors.toList());
     }
 }

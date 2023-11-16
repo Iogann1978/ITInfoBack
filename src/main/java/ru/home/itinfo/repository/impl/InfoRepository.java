@@ -19,6 +19,4 @@ public interface InfoRepository extends CommonRepository<Info, Long> {
     @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
     @Query("select distinct i from Info i left join fetch i.tags left join fetch i.descripts order by i.title")
     List<Info> getListOrdered();
-    @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
-    List<Info> getAllByTitleLike(String title);
 }

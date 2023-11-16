@@ -7,7 +7,9 @@ import org.springframework.util.CollectionUtils;
 import ru.home.itinfo.dto.AuthorDTO;
 import ru.home.itinfo.dto.BookDTO;
 import ru.home.itinfo.dto.DescriptDTO;
+import ru.home.itinfo.dto.FindDTO;
 import ru.home.itinfo.mapper.BookMapper;
+import ru.home.itinfo.mapper.FindMapper;
 import ru.home.itinfo.model.Author;
 import ru.home.itinfo.model.Book;
 import ru.home.itinfo.repository.impl.BookRepository;
@@ -21,16 +23,19 @@ public class BookService extends CommonService<BookDTO, Book, Long> {
     private final AuthorService authorService;
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+    private final FindMapper findMapper;
 
     @Autowired
     public BookService(
             BookRepository bookRepository,
             AuthorService authorService,
-            BookMapper bookMapper) {
+            BookMapper bookMapper,
+            FindMapper findMapper) {
         super(bookRepository, bookMapper, "Книга");
         this.authorService = authorService;
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
+        this.findMapper = findMapper;
     }
 
     public void merge(BookDTO dto) {
@@ -51,5 +56,15 @@ public class BookService extends CommonService<BookDTO, Book, Long> {
     public List<BookDTO> findByIsbn(String isbn) {
         return bookRepository.findAllByIsbn(isbn)
                 .stream().map(bookMapper::entityToDto).collect(Collectors.toList());
+    }
+
+    public List<FindDTO> findByTitle(String title) {
+        return bookRepository.getAllByTitleLike(title).stream()
+                .map(bookMapper::entityToDto)
+                .map(findMapper::fromInfoDTO).collect(Collectors.toList());
+    }
+
+    public boolean existsById(Long id) {
+        return bookRepository.existsById(id);
     }
 }

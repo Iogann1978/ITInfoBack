@@ -21,5 +21,5 @@ public interface PublisherRepository extends CommonRepository<Publisher, Long> {
     @Query("select distinct p from Publisher p left join fetch p.infos order by p.name")
     List<Publisher> getListOrdered();
     @EntityGraph(attributePaths = {"infos"})
-    List<Publisher> getAllByNameLike(String publisher);
+    List<Publisher> getAllByName(String publisher);
 }

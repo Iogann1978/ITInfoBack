@@ -20,4 +20,6 @@ public interface BookRepository extends CommonRepository<Book, Long> {
     List<Book> getListOrdered();
     @EntityGraph(attributePaths = {"publisher", "tags", "authors", "descripts", "file"})
     List<Book> findAllByIsbn(String isbn);
+    @EntityGraph(attributePaths = {"publisher", "tags", "descripts", "file"})
+    List<Book> getAllByTitleLike(String title);
 }
